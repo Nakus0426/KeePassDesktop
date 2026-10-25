@@ -1,0 +1,37 @@
+name: ci
+
+# Q25: CI covers the vault layer only. GPUI needs a GPU-adjacent environment and
+# is not worth building on a runner; the UI is verified locally.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  vault-layer:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: ". -> target"
+
+      # --locked is deliberate: a `cargo update` that floats gpui-pre or keepass
+      # must be a reviewed commit, never a CI side effect (architecture.md R3).
+      - name: Format
+        run: cargo fmt --all --check
+
+      - name: Clippy (vault layer)
+        run: cargo clippy -p keepass-core -p vault-model -p platform-api -p platform-win --locked -- -D warnings
+
+      - name: Test (vault layer)
+        run: cargo test -p keepass-core -p vault-model -p platform-api -p platform-win --locked

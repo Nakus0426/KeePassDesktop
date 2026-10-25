@@ -1,0 +1,15 @@
+# Multi-machine collaboration: the repo owns line endings, not each machine.
+# Without this, a Windows checkout with core.autocrlf=true and a checkout with
+# false produce full-file diffs on every file, which hides real changes.
+* text=auto eol=lf
+
+# KDBX vaults and key files are binary by definition; CRLF conversion corrupts
+# them and breaks the HMAC. Fixtures under crates/keepass-core/tests are KDBX.
+*.kdbx binary
+*.keyx binary
+
+# Raster assets and .crate archives.
+*.png binary
+*.jpg binary
+*.gif binary
+*.crate binary

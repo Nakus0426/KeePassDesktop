@@ -1,0 +1,44 @@
+/target
+
+# Cargo lock for a binary crate is committed; this ignore only guards the
+# cargo target-dir override some machines set via CARGO_HOME config.
+**/target/
+
+# Local test vault files. Real fixtures live under crates/keepass-core/tests/fixtures
+# and are committed deliberately; anything else here is a developer's own vault.
+*.kdbx
+*.kdbx.bak
+*.kdbx.tmp
+!crates/keepass-core/tests/fixtures/*.kdbx
+
+# Editor / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Screenshots produced during manual verification
+.shot*.png
+
+# Fixture generator dependencies. gen.js and package-lock.json are committed:
+# the lock pins kdbxweb/hash-wasm so every machine regenerates byte-identical
+# .kdbx fixtures, which the g2 assertions compare against.
+tools/fixtures/node_modules/
+
+# Upstream crate sources unpacked locally for API reading. Zero references from
+# this repo; `cargo` re-downloads them, so committing 33 MB of third-party code
+# only slows clone and pollutes diffs.
+.research/
+
+# DSH sandbox ACL repair reports. Machine-local SIDs and paths, meaningless to
+# teammates.
+/.acl-report/
+
+# Panic log written to %LOCALAPPDATA%; a copy next to the exe is still a leak.
+panic.log
+
+# >>> magpie: library skills placed here (magpie adds and removes these lines) >>>
+/.agents/skills/gpui-kit
+/.agents/skills/gpui-kit-design-guides
+# <<< magpie <<<
