@@ -1,0 +1,23 @@
+[package]
+name = "keepass-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "KDBX read/write boundary. Owns all key material and disk transactions."
+
+[dependencies]
+keepass.workspace = true
+zeroize.workspace = true
+secrecy.workspace = true
+sha2.workspace = true
+subtle.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+uuid.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

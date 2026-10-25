@@ -1,0 +1,14 @@
+{
+  "name": "keepass-desktop-fixtures",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "description": "Generates the KDBX test fixtures for crates/keepass-core. Uses kdbxweb so the fixtures are independent of the Rust keepass crate under test.",
+  "scripts": {
+    "gen": "node gen.js"
+  },
+  "dependencies": {
+    "hash-wasm": "^4.12.0",
+    "kdbxweb": "^2.1.1"
+  }
+}

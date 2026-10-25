@@ -1,0 +1,33 @@
+[package]
+name = "app"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Assembly: state machine, routing, screens."
+
+[[bin]]
+name = "keepass-desktop"
+path = "src/main.rs"
+
+[dependencies]
+keepass-core = { path = "../keepass-core" }
+vault-model = { path = "../vault-model" }
+design-system = { path = "../design-system" }
+platform-api = { path = "../platform-api" }
+platform-win = { path = "../platform-win" }
+gpui-kit.workspace = true
+secrecy.workspace = true
+tracing.workspace = true
+thiserror.workspace = true
+
+[features]
+# Default is the `windows` subsystem: double-clicking the exe must NOT spawn a
+# console window next to the app.
+#
+# Enable `console` to keep the `console` subsystem and see live stdout/stderr:
+#   cargo run -p app --features console
+# Panics are logged to %LOCALAPPDATA%\KeePassDesktop\panic.log either way.
+default = []
+console = []

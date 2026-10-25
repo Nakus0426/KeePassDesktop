@@ -1,0 +1,18 @@
+[package]
+name = "design-system"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Design tokens and atomic controls. The only consumer of gpui-kit."
+
+[dependencies]
+gpui-kit.workspace = true
+
+[features]
+default = []
+# Escape hatch (docs/architecture.md Q14=B): pull gpui-component's Input /
+# DataTable in behind our own API when a from-scratch control cannot meet the
+# CJK IME or virtualisation bar. gpui-kit's feature is named `component`.
+component-fallback = ["gpui-kit/component"]
